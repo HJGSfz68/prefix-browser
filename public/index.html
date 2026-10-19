@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>通行 · 网页加速入口</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/clean.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <header>
+    <a class="brand" href="/">↗ <span>通行</span><small>PREFIX BROWSER</small></a>
+    <span id="status" role="status">就绪</span>
+  </header>
+  <main id="welcome">
+    <div class="badge"><i></i> 你的网页，换一条路线</div>
+    <h1>一个前缀，<br><em>连接整个网页。</em></h1>
+    <p class="intro">输入网址，打开完整页面。链接跳转、动态资源与网页视频，交给同一个代理环境。</p>
+    <div class="example"><span>前缀访问</span><code id="prefix-example"></code></div>
+  </main>
+  <section id="navigation">
+    <form id="address-form">
+      <span class="input-icon">◎</span>
+      <label class="sr-only" for="address">目标网址</label>
+      <input id="address" type="text" inputmode="url" placeholder="输入需要访问的网址，例如 https://example.com" autocomplete="off" spellcheck="false" required>
+      <button id="go" type="submit">开始访问 <span>↗</span></button>
+    </form>
+    <div class="tools">
+      <span id="hint">支持 HTTP / HTTPS · 公网部署使用 HTTPS</span>
+      <button id="copy" type="button">复制访问链接</button>
+      <button id="reload" type="button" hidden>重新加载</button>
+      <button id="fullscreen" type="button" hidden>全屏网页</button>
+    </div>
+    <p id="error" role="alert" hidden></p>
+  </section>
+  <section id="viewport" hidden aria-label="代理网页"></section>
+  <button id="toggle-tools" type="button" hidden aria-label="展开访问工具栏" aria-expanded="false" title="访问工具栏 · Ctrl+Shift+L">☰</button>
+  <section class="features" id="features">
+    <article><b>01 / 完整网页</b><p>不只是单个文件，页面资源与后续浏览共享代理环境。</p></article>
+    <article><b>02 / 一键进入</b><p>无需浏览器插件。粘贴网址，或直接把本站地址加在网址前面。</p></article>
+    <article><b>03 / 网页媒体</b><p>在页面原有播放器中播放，兼容程度取决于目标站点与浏览器。</p></article>
+  </section>
+  <footer id="footer"><span>通行 / PREFIX BROWSER</span><span>Powered by Scramjet + Wisp</span></footer>
+</body>
+</html>

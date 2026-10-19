@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>网页访问</title>
+  <link rel="icon" href="data:,">
+  <style>html,body,iframe{margin:0;width:100%;height:100%;border:0}body{height:100dvh}iframe{display:block}#message{position:fixed;inset:0;display:grid;place-items:center;background:#fff;color:#333;font:14px system-ui;padding:24px;white-space:pre-wrap;overflow-wrap:anywhere}#message[hidden]{display:none}</style>
+  <style>
+    *{box-sizing:border-box}button,input{font:inherit}button{cursor:pointer}#floating-tools{position:fixed;z-index:100;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));width:42px;height:42px;border:1px solid #badacb;border-radius:50%;background:#18372eee;color:#e0ffec;box-shadow:0 3px 14px #0004;font:20px system-ui;opacity:.7}#floating-tools:hover,#floating-tools:focus-visible{opacity:1}#tools-panel{position:fixed;inset:auto max(16px,env(safe-area-inset-right)) max(70px,calc(env(safe-area-inset-bottom) + 60px)) auto;margin:0;width:min(440px,calc(100vw - 32px));max-height:calc(100dvh - 100px);overflow:auto;background:#101c18;color:#e5f5ed;border:1px solid #456254;border-radius:16px;padding:18px;box-shadow:0 12px 40px #0006;font:14px system-ui}#tools-panel::backdrop{background:#0003}.panel-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.panel-title button{background:none;color:inherit;border:0;padding:8px;font-size:20px}#tools-panel label{display:block;margin-bottom:8px}#target-input{width:100%;min-width:0;padding:12px;border:1px solid #577061;border-radius:8px;background:#07120e;color:#fff;font-size:16px}#tools-form button{width:100%;margin-top:10px;background:#a4edc7;color:#0b281a;border:0;border-radius:8px;padding:12px}.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.actions button{min-height:44px;border:1px solid #4a6356;border-radius:8px;background:#1c3026;color:inherit;padding:8px}#tools-status{margin:12px 0 0;color:#bfd8cb;overflow-wrap:anywhere;min-height:20px}button:focus-visible,input:focus-visible{outline:2px solid #a4edc7;outline-offset:3px}@media(pointer:coarse),(max-width:600px){#floating-tools{width:48px;height:48px}#tools-panel{left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));bottom:max(82px,calc(env(safe-area-inset-bottom) + 68px));width:auto;padding:16px}.actions button{min-height:48px}}@media(prefers-reduced-motion:no-preference){#floating-tools{transition:opacity .15s}}
+  </style>
+</head>
+<body>
+  <div id="message" role="status">正在连接…</div>
+  <button id="floating-tools" type="button" aria-label="打开访问工具" aria-controls="tools-panel" aria-expanded="false">☰</button>
+  <dialog id="tools-panel" aria-labelledby="tools-title">
+    <div class="panel-title"><strong id="tools-title">访问工具</strong><button id="close-tools" type="button" aria-label="关闭访问工具">×</button></div>
+    <form id="tools-form"><label for="target-input">目标网址</label><input id="target-input" type="text" inputmode="url" autocomplete="off" spellcheck="false" required><button type="submit">打开网址 ↗</button></form>
+    <div class="actions"><button id="copy-link" type="button">复制链接</button><button id="reload-page" type="button">重新加载</button><button id="fullscreen-page" type="button">全屏网页</button></div>
+    <p id="tools-status" role="status" aria-live="polite"></p>
+    <p style="margin:10px 0 0;font-size:12px"><a href="https://github.com/HJGSfz68/prefix-browser" target="_blank" rel="noopener noreferrer" style="color:#bfd8cb">开源代码</a> · <a href="/licenses/NOTICE.txt" target="_blank" rel="noopener noreferrer" style="color:#bfd8cb">组件许可</a></p>
+  </dialog>
+  <script type="module" src="/direct.js"></script>
+</body>
+</html>

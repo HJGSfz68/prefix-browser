@@ -1,0 +1,31 @@
+{
+  "name": "prefix-browser",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test test/*.test.js",
+    "build:workers": "node scripts/build-workers.mjs",
+    "build:pages": "node scripts/build-pages.mjs",
+    "dev:workers": "npm run build:workers && wrangler dev --port 8787",
+    "deploy:workers": "npm run build:workers && wrangler deploy",
+    "check:workers": "npm run build:workers && wrangler deploy --dry-run"
+  },
+  "dependencies": {
+    "@fastify/static": "10.1.6",
+    "@mercuryworkshop/bare-mux": "2.1.9",
+    "@mercuryworkshop/libcurl-transport": "1.5.2",
+    "@mercuryworkshop/scramjet": "https://github.com/MercuryWorkshop/scramjet/releases/download/v1.1.0/mercuryworkshop-scramjet-1.1.0.tgz",
+    "@mercuryworkshop/wisp-js": "0.4.1",
+    "fastify": "5.12.7"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "wrangler": "4.151.1"
+  }
+}

@@ -1,0 +1,24 @@
+name: Test and build V5
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build:pages
+      - run: npm run check:workers
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prefix-browser-pages-v5
+          path: pages-dist/
+          include-hidden-files: true

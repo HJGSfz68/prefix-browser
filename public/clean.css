@@ -1,0 +1,10 @@
+/* Browsing mode: content occupies the entire viewport; tools are opt-in. */
+body.browsing{height:100dvh;overflow:hidden;background:#fff}
+.browsing>header,.browsing>#navigation{display:none}
+.browsing>#viewport{position:fixed;inset:0;width:100%;height:100dvh}
+.browsing.tools-open>header{display:flex;position:fixed;inset:0 0 auto;z-index:30;background:#0c1017;height:52px}
+.browsing.tools-open>#navigation{display:block;position:fixed;inset:52px 0 auto;z-index:30;background:#0c1017;padding-bottom:12px;box-shadow:0 12px 28px #0005}
+#toggle-tools{position:fixed;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:40;width:36px;height:36px;border:1px solid #ffffff40;border-radius:50%;background:#14231ed9;color:#ccf9e4;opacity:.45;box-shadow:0 2px 8px #0003;font-size:17px;transition:opacity .15s}
+#toggle-tools:hover,#toggle-tools:focus-visible{opacity:1}
+button:focus-visible,input:focus-visible{outline:2px solid #9ceec9;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){#toggle-tools{transition:none}}

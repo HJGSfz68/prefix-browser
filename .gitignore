@@ -1,4 +1,7 @@
 # AI Tools
+.wrangler/
+pages-dist/
+.monkeycode-tmp-files/
 .claude
 .gemini
 .opencode
