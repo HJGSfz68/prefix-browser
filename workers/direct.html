@@ -15,8 +15,8 @@
   <button id="floating-tools" type="button" aria-label="打开访问工具" aria-controls="tools-panel" aria-expanded="false">☰</button>
   <dialog id="tools-panel" aria-labelledby="tools-title">
     <div class="panel-title"><strong id="tools-title">访问工具</strong><button id="close-tools" type="button" aria-label="关闭访问工具">×</button></div>
-    <form id="tools-form"><label for="target-input">目标网址</label><input id="target-input" type="text" inputmode="url" autocomplete="off" spellcheck="false" required><button type="submit">打开网址 ↗</button></form>
-    <div class="actions"><button id="copy-link" type="button">复制链接</button><button id="reload-page" type="button">重新加载</button><button id="fullscreen-page" type="button">全屏网页</button></div>
+    <form id="tools-form"><label for="target-input">目标网址</label><input id="target-input" type="text" inputmode="url" autocomplete="off" spellcheck="false" required><button id="open-target" type="submit" disabled>正在初始化…</button></form>
+    <div class="actions"><button id="copy-link" type="button">复制链接</button><button id="reload-page" type="button" disabled>重新加载</button><button id="fullscreen-page" type="button">全屏网页</button></div>
     <p id="tools-status" role="status" aria-live="polite"></p>
     <p style="margin:10px 0 0;font-size:12px"><a href="https://github.com/HJGSfz68/prefix-browser" target="_blank" rel="noopener noreferrer" style="color:#bfd8cb">开源代码</a> · <a href="/licenses/NOTICE.txt" target="_blank" rel="noopener noreferrer" style="color:#bfd8cb">组件许可</a></p>
   </dialog>

@@ -9,6 +9,7 @@ test('preserves encoded signatures, query and fragment', () => {
 test('encoded entry round trips', () => {
   const original = 'https://example.com/a?x=%2F#section';
   assert.equal(targetFromLocation(new URL(makeShareUrl('https://proxy.test', original))), original);
+  assert.equal(makeShareUrl('https://proxy.test', original), `https://proxy.test/${original}`);
 });
 test('rejects unsupported schemes and credentials', () => {
   for (const value of ['javascript:alert(1)', 'file:///etc/passwd', 'https://user:pass@example.com', 'https://example.com:8081']) assert.throws(() => normalizeTarget(value));

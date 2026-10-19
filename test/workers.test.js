@@ -62,3 +62,18 @@ test('root returns plain-text usage instead of a frontend page', async () => {
   assert.equal(response.headers.get('Content-Type'), 'text/plain; charset=utf-8');
   assert.equal(await response.text(), `用法: ${proxy}/https://目标网址`);
 });
+
+test('legacy query entry redirects to stable prefix URL', async () => {
+  const target = 'https://example.com/a?x=1';
+  const response = await worker.fetch(new Request(`${proxy}/?url=${encodeURIComponent(target)}`), { ASSETS: { fetch: async () => new Response('unused') } });
+  assert.equal(response.status, 302);
+  assert.equal(response.headers.get('location'), `${proxy}/${target}`);
+});
+
+test('direct mobile shell queues navigation until proxy initialization completes', async () => {
+  const source = await (await import('node:fs/promises')).readFile(new URL('../workers/direct.js', import.meta.url), 'utf8');
+  assert.doesNotMatch(source, /代理仍在初始化，请稍后重试/);
+  assert.match(source, /pendingTarget = target/);
+  assert.match(source, /完成后会自动打开该网址/);
+  assert.match(source, /withTimeout\(connection\.setTransport/);
+});

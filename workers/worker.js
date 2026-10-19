@@ -139,6 +139,18 @@ export default {
     if (url.pathname === '/healthz') return json({ ok: true, runtime: 'cloudflare-workers', transport: 'native-fetch', version: 'pages-floating-v5' });
     if (url.pathname.startsWith('/api/')) return json({ error: 'Not found' }, 404);
     if (!['GET', 'HEAD'].includes(request.method)) return json({ error: 'Method not allowed' }, 405);
+    if (url.pathname === '/' && url.searchParams.get('url')) {
+      try {
+        const target = new URL(url.searchParams.get('url'));
+        if (!['http:', 'https:'].includes(target.protocol) || target.username || target.password) throw new Error('Invalid target');
+        return Response.redirect(`${url.origin}/${target.href}`, 302);
+      } catch {
+        return new Response(request.method === 'HEAD' ? null : `用法: ${url.origin}/https://目标网址`, {
+          status: 400,
+          headers: { ...ISOLATION, 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store' },
+        });
+      }
+    }
     if (url.pathname === '/' && !url.searchParams.get('url')) {
       return new Response(request.method === 'HEAD' ? null : `用法: ${url.origin}/https://目标网址`, {
         headers: { ...ISOLATION, 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store' },

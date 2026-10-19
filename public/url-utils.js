@@ -19,5 +19,5 @@ export function targetFromLocation(location) {
 }
 
 export function makeShareUrl(origin, target) {
-  return `${origin}/?url=${encodeURIComponent(normalizeTarget(target))}`;
+  return `${origin}/${normalizeTarget(target)}`;
 }

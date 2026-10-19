@@ -7,7 +7,7 @@ const root = new URL('../', import.meta.url);
 const dist = new URL('dist/', root);
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
-for (const name of ['index.html', 'app.js', 'style.css', 'clean.css', 'url-utils.js', 'sw.js']) {
+for (const name of ['index.html', 'app.js', 'style.css', 'clean.css', 'url-utils.js', 'sw.js', 'shared-worker-polyfill.js']) {
   await cp(new URL(`public/${name}`, root), new URL(name, dist));
 }
 // Copy only runtime files, excluding source maps, declarations and unused bundles.
@@ -19,6 +19,7 @@ for (const [source, prefix, names] of [
   for (const name of names) await cp(`${source}/${name}`, new URL(`${prefix}/${name}`, dist));
 }
 await cp(new URL('workers/transport.mjs', root), new URL('workers-transport.mjs', dist));
+await cp(new URL('public/baremux/dedicated-worker.js', root), new URL('baremux/dedicated-worker.js', dist));
 await mkdir(new URL('licenses/', dist), { recursive: true });
 await cp(new URL('node_modules/@mercuryworkshop/scramjet/LICENSE', root), new URL('licenses/scramjet.txt', dist));
 await cp(new URL('node_modules/@mercuryworkshop/bare-mux/LICENSE', root), new URL('licenses/bare-mux.txt', dist));
@@ -36,7 +37,7 @@ await cp(new URL('workers/direct.html', root), new URL('index.html', dist));
 await cp(new URL('workers/direct.js', root), new URL('direct.js', dist));
 for (const name of ['app.js', 'style.css', 'clean.css']) await rm(new URL(name, dist));
 const { transform } = await import('esbuild');
-for (const [name, loader] of [['direct.js', 'js'], ['url-utils.js', 'js'], ['sw.js', 'js'], ['workers-transport.mjs', 'js']]) {
+for (const [name, loader] of [['direct.js', 'js'], ['url-utils.js', 'js'], ['sw.js', 'js'], ['shared-worker-polyfill.js', 'js'], ['baremux/dedicated-worker.js', 'js'], ['workers-transport.mjs', 'js']]) {
   const result = await transform(await readFile(new URL(name, dist), 'utf8'), { loader, minify: true, target: 'es2022' });
   await writeFile(new URL(name, dist), result.code);
 }
