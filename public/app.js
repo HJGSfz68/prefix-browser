@@ -30,7 +30,6 @@ function showError(error) { clearTimeout(loadTimer); if (document.body.classList
 
 async function initialize() {
   if (!window.isSecureContext || !navigator.serviceWorker) throw new Error('请通过 HTTPS 或 http://localhost:8080 打开；此环境需要 Service Worker。');
-  if (!window.crossOriginIsolated) throw new Error('缺少跨源隔离响应头，请检查反向代理是否保留 COOP / COEP。');
   await Promise.all([loadScript('/scram/scramjet.all.js'), loadScript('/baremux/index.js')]);
   const { ScramjetController } = window.$scramjetLoadController();
   engine = new ScramjetController({

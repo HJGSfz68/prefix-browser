@@ -47,7 +47,6 @@ try {
   if (!target) throw new Error(`用法: ${location.origin}/https://目标网址`);
   if (new URL(normalizeTarget(target)).origin === location.origin) throw new Error('不能代理本站自身');
   if (!isSecureContext || !navigator.serviceWorker) throw new Error('请通过 HTTPS 访问');
-  if (!crossOriginIsolated) throw new Error('代理所需响应头缺失，请重新部署完整压缩包');
   await Promise.all([loadScript('/scram/scramjet.all.js'), loadScript('/baremux/index.js')]);
   const { ScramjetController } = window.$scramjetLoadController();
   const engine = new ScramjetController({ prefix: '/service/', files: {
